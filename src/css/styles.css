@@ -190,4 +190,27 @@ color: #2e2f42;
   75%{ transform: rotate(-90deg)}
 }
   
-    
+.btn-load{
+  margin-top: 20px;
+  border-radius: 8px;
+  padding: 8px 16px;
+  width: 130px;
+  height: 40px;
+  background: #4e75ff;
+  font-family: "Montserrat", sans-serif;
+font-weight: 500;
+font-size: 16px;
+line-height: 150%;
+letter-spacing: 0.04em;
+color: #fff;
+border: none;
+transition: 0.6s;
+}
+.btn-load:hover{
+  background: #6c8cff;
+}
+.main-stl{
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+}
