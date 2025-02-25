@@ -132,66 +132,38 @@ color: #2e2f42;
 
 
 .loader {
-  width: 50px;
-  height: 165px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
   position: relative;
+  align-self: center;
+  animation: rotate 1s linear infinite
 }
 .loader::before {
-  content: '';
+  content: "";
+  box-sizing: border-box;
   position: absolute;
-  left: 50%;
-  top: 0;
-  transform: translate(-50% , 0);
-  width: 16px;
-  height: 16px;
-  background: #4e75ff;
+  inset: 0px;
   border-radius: 50%;
-  animation: bounce 2s linear infinite;
-}
-.loader::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin: auto;
-  height: 48px;
-  width: 48px;
-  background: #4e75ff;
-  border-radius: 4px;
-  animation: rotate 2s linear infinite;
+  border: 5px solid #4e75ff;
+  animation: prixClipFix 2s linear infinite ;
 }
 
-@keyframes bounce {
-  0% , 50% , 100%{
-    transform: translate(-50%, 0px);
-    height: 20px;
-  }
-  20% {
-    transform: translate(-25%, 85px);
-    height: 28px;
-  }
-  25% {
-    transform: translate(-25%, 110px);
-    height: 12px;
-  }
-  70% {
-    transform: translate(-75%, 85px);
-    height: 28px;
-  }
-  75% {
-    transform: translate(-75%, 108px);
-    height: 12px;
-  }
-}
 @keyframes rotate {
-  0% , 50% , 100%{ transform: rotate(0deg)}
-  25% { transform: rotate(90deg)}
-  75%{ transform: rotate(-90deg)}
+  100%   {transform: rotate(360deg)}
+}
+
+@keyframes prixClipFix {
+    0%   {clip-path:polygon(50% 50%,0 0,0 0,0 0,0 0,0 0)}
+    25%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 0,100% 0,100% 0)}
+    50%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,100% 100%,100% 100%)}
+    75%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,0 100%,0 100%)}
+    100% {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,0 100%,0 0)}
 }
   
 .btn-load{
   margin-top: 20px;
+  margin-bottom: 20px;
   border-radius: 8px;
   padding: 8px 16px;
   width: 130px;
@@ -205,12 +177,19 @@ letter-spacing: 0.04em;
 color: #fff;
 border: none;
 transition: 0.6s;
+align-self: center;
 }
 .btn-load:hover{
   background: #6c8cff;
 }
 .main-stl{
 display: flex;
-flex-wrap: wrap;
-justify-content: center;
+flex-direction: column;
+/* align-items: flex-start;
+justify-content: center; */
+}
+
+.hidden {
+  display: none;
+  opacity: 0;
 }

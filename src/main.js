@@ -19,6 +19,7 @@ const refs = {
   gallery: document.querySelector('.gallery'),
   loader: document.querySelector('.msg'),
   btnLoadMore: document.querySelector('.btn-load'),
+  loaderSec: document.querySelector('.loader'),
 };
 
 const params = {
@@ -90,12 +91,15 @@ refs.form.addEventListener('submit', async e => {
 });
 
 refs.btnLoadMore.addEventListener('click', async () => {
-showSpinner();
+  showSpinner();
   params.page += 1;
   checkBtnStatus();
   const res = await getImg(params.searchText, params.page, params.perPage);
   const markup = createElemets(res.data.hits);
+  hideSpinner();
   refs.gallery.insertAdjacentHTML('beforeend', markup);
+  lightbox.refresh();
+  scrollPage();
 });
 
 function checkBtnStatus() {
@@ -104,7 +108,9 @@ function checkBtnStatus() {
 
   if (params.page >= maxPage) {
     hideLoadMoreBtn();
-    iziToast.info('This is last page');
+    iziToast.show({
+      message: "We're sorry, but you've reached the end of search results.",
+    });
   } else {
     showLoadMoreBtn();
   }
@@ -118,9 +124,18 @@ function hideLoadMoreBtn() {
 }
 
 function showSpinner() {
-  refs.loader.classList.remove('hidden');
+  refs.loaderSec.classList.remove('hidden');
 }
 
 function hideSpinner() {
-  refs.loader.classList.add('hidden');
+  refs.loaderSec.classList.add('hidden');
+}
+
+function scrollPage() {
+  const info = refs.gallery.firstElementChild.getBoundingClientRect();
+  const height = info.height;
+  window.scrollBy({
+    behavior: 'smooth',
+    top: height * 2,
+  });
 }
